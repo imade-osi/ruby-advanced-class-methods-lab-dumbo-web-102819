@@ -64,8 +64,8 @@ class Song
 
 def self.new_from_filename(name)
   
-  artist = name.slice(0...name.index("-") - 1)
-  song_name = name.slice(name.index("-") + 2...name.index("."))
+  artist = name.slice(0...name.index("- ") )
+  song_name = name.slice(name.index("- ")...name.index("."))
       
       song_instance = self.new
       song_instance.name = song_name 
@@ -74,8 +74,10 @@ def self.new_from_filename(name)
 end
 
 def self.create_from_filename(name)
-    initialized = self.new_from_filename(name)
-    initialized.save
+    @@all << new_from_filename(name)
+    
+    #initialized = self.new_from_filename(name)
+    #initialized.save
 end
 
  def self.destroy_all
